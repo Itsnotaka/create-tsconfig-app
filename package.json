@@ -1,0 +1,51 @@
+{
+	"name": "create-ts-config",
+	"version": "1.0.0",
+	"description": "",
+	"bin": {
+		"create-ts-config": "./dist/index.js"
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"watch": "ncc build ./index.ts -w -o dist/",
+		"dev": "node dist/index.js",
+		"prerelease": "rimraf ./dist/",
+		"release": "ncc build ./index.ts -o ./dist/ --minify --no-cache --no-source-map-register",
+		"build": "yarn release"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Itsnotaka/create-ts-config.git"
+	},
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Itsnotaka/create-ts-config/issues"
+	},
+	"homepage": "https://github.com/Itsnotaka/create-ts-config#readme",
+	"devDependencies": {
+		"@types/async-retry": "^1.4.4",
+		"@types/cross-spawn": "^6.0.2",
+		"@types/node": "^18.0.0",
+		"@types/prompts": "^2.0.14",
+		"@types/rimraf": "^3.0.2",
+		"@types/tar": "^6.1.1",
+		"@types/validate-npm-package-name": "^3.0.3",
+		"@vercel/ncc": "^0.34.0",
+		"async-retry": "^1.3.3",
+		"chalk": "4.1.2",
+		"chokidar": "^3.5.3",
+		"commander": "2.20.0",
+		"cpy": "^9.0.1",
+		"cross-spawn": "^7.0.3",
+		"got": "11.8.5",
+		"prompts": "^2.4.2",
+		"rimraf": "^3.0.2",
+		"tar": "^6.1.11",
+		"typescript": "^4.6.3",
+		"update-check": "^1.5.4",
+		"validate-npm-package-name": "^4.0.0"
+	}
+}
