@@ -175,15 +175,6 @@ export async function createApp({
 			);
 		}
 
-		// Copy default `next-env.d.ts` to any example that is typescript
-		const tsconfigPath = path.join(root, 'tsconfig.json');
-		if (fs.existsSync(tsconfigPath)) {
-			fs.copyFileSync(
-				path.join(__dirname, 'templates', 'typescript', 'next-env.d.ts'),
-				path.join(root, 'next-env.d.ts'),
-			);
-		}
-
 		console.log('Installing packages. This might take a couple of minutes.');
 		console.log();
 
@@ -266,11 +257,14 @@ export async function createApp({
 		 * Copy the template files to the target directory.
 		 */
 		await cpy('**', root, {
-			cwd: path.join(__dirname, 'templates', 'default'),
+			cwd: path.join(__dirname, 'examples', 'default'),
 			rename: name => {
 				switch (name) {
 					case 'gitignore':
-					case 'eslintrc.json': {
+					case 'prettierrc': {
+						return '.'.concat(name);
+					}
+					case 'eslintrc.js': {
 						return '.'.concat(name);
 					}
 					// README.md is ignored by webpack-asset-relocator-loader used by ncc:
