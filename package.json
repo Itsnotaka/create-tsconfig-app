@@ -1,5 +1,5 @@
 {
-	"name": "create-ts-config",
+	"name": "create-ts-app",
 	"version": "1.0.0",
 	"description": "",
 	"bin": {
@@ -10,21 +10,21 @@
 	],
 	"scripts": {
 		"watch": "ncc build ./index.ts -w -o dist/",
-		"dev": "node dist/index.js",
+		"dev": "yarn build && node dist/index.js",
 		"prerelease": "rimraf ./dist/",
 		"release": "ncc build ./index.ts -o ./dist/ --minify --no-cache --no-source-map-register",
 		"build": "yarn release"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Itsnotaka/create-ts-config.git"
+		"url": "git+https://github.com/Itsnotaka/create-ts-app.git"
 	},
 	"author": "",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/Itsnotaka/create-ts-config/issues"
+		"url": "https://github.com/Itsnotaka/create-ts-app/issues"
 	},
-	"homepage": "https://github.com/Itsnotaka/create-ts-config#readme",
+	"homepage": "https://github.com/Itsnotaka/create-ts-app#readme",
 	"devDependencies": {
 		"@types/async-retry": "^1.4.4",
 		"@types/cross-spawn": "^6.0.2",
