@@ -126,7 +126,6 @@ async function run() {
 			packageManager,
 			example: example && example !== 'default' ? example : undefined,
 			examplePath: program.examplePath,
-			typescript: program.typescript,
 		});
 	} catch (reason) {
 		if (!(reason instanceof DownloadError)) {
@@ -148,7 +147,6 @@ async function run() {
 		await createApp({
 			appPath: resolvedProjectPath,
 			packageManager,
-			typescript: program.typescript,
 		});
 	}
 }

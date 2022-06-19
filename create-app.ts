@@ -28,13 +28,11 @@ export async function createApp({
 	packageManager,
 	example,
 	examplePath,
-	typescript,
 }: {
 	appPath: string;
 	packageManager: PackageManager;
 	example?: string;
 	examplePath?: string;
-	typescript?: boolean;
 }): Promise<void> {
 	let repoInfo: RepoInfo | undefined;
 
@@ -221,13 +219,13 @@ export async function createApp({
 		/**
 		 * Default devDependencies.
 		 */
-		const devDependencies = ['eslint', 'prettier'];
+		const devDependencies = ['eslint', 'prettier', 'typescript', '@types/node'];
 		/**
 		 * TypeScript projects will have type definitions and other devDependencies.
 		 */
-		if (typescript) {
-			devDependencies.push('typescript', '@types/node');
-		}
+		// if (typescript) {
+		// 	devDependencies.push();
+		// }
 
 		/**
 		 * Install package.json dependencies if they exist.
