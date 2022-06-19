@@ -1,6 +1,6 @@
 {
 	"name": "create-tsconfig-app",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "Create Typescript apps with one command",
 	"bin": {
 		"create-tsconfig-app": "./dist/index.js"
