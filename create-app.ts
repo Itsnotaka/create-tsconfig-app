@@ -170,7 +170,7 @@ export async function createApp({
 		const ignorePath = path.join(root, '.gitignore');
 		if (!fs.existsSync(ignorePath)) {
 			fs.copyFileSync(
-				path.join(__dirname, 'examples', 'default', 'gitignore'),
+				path.join(__dirname, 'templates', 'default', 'gitignore'),
 				ignorePath,
 			);
 		}
@@ -257,7 +257,7 @@ export async function createApp({
 		 * Copy the template files to the target directory.
 		 */
 		await cpy('**', root, {
-			cwd: path.join(__dirname, 'examples', 'default'),
+			cwd: path.join(__dirname, 'templates', 'default'),
 			rename: name => {
 				switch (name) {
 					case 'gitignore':
