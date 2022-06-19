@@ -170,7 +170,7 @@ export async function createApp({
 		const ignorePath = path.join(root, '.gitignore');
 		if (!fs.existsSync(ignorePath)) {
 			fs.copyFileSync(
-				path.join(__dirname, 'templates', 'default', 'gitignore'),
+				path.join(__dirname, 'examples', 'default', 'gitignore'),
 				ignorePath,
 			);
 		}
@@ -214,7 +214,7 @@ export async function createApp({
 		/**
 		 * Default dependencies.
 		 */
-		const dependencies = [''];
+		const dependencies:string[] = [];
 		/**
 		 * Default devDependencies.
 		 */
