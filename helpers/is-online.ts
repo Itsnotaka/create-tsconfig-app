@@ -12,7 +12,7 @@ function getProxy(): string | undefined {
 		const httpsProxy = execSync('npm config get https-proxy').toString().trim();
 		// eslint-disable-next-line no-negated-condition
 		return httpsProxy !== 'null' ? httpsProxy : undefined;
-	// eslint-disable-next-line no-unused-vars
+		// eslint-disable-next-line no-unused-vars
 	} catch (e) {
 		// eslint-disable-next-line no-useless-return
 		return;

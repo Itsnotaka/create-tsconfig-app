@@ -38,7 +38,7 @@ export function tryGitInit(root: string): boolean {
 			stdio: 'ignore',
 		});
 		return true;
-	// eslint-disable-next-line no-unused-vars
+		// eslint-disable-next-line no-unused-vars
 	} catch (e) {
 		if (didInit) {
 			try {
