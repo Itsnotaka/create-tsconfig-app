@@ -34,7 +34,7 @@ test/tmp/**
 # examples
 examples/**/out
 examples/**/.env*.local
-
+my-app
 pr-stats.md
 test-timings.json
 
