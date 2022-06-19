@@ -265,11 +265,13 @@ export async function createApp({
 		 * Copy the template files to the target directory.
 		 */
 		await cpy('**', root, {
+			parents: true,
 			cwd: path.join(__dirname, 'templates/default'),
 			rename(name) {
 				switch (name) {
 					case 'gitignore':
-					case 'eslintrc.json': {
+					case 'prettierrc':
+					case 'eslintrc.js': {
 						return '.'.concat(name);
 					}
 
