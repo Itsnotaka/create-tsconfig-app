@@ -64,7 +64,7 @@ export function hasRepo({
 
 export function hasExample(name: string): Promise<boolean> {
 	return isUrlOk(
-		`https://api.github.com/repos/itsnotaka/next.js/contents/examples/${encodeURIComponent(
+		`https://api.github.com/repos/itsnotaka/create-ts-app/contents/examples/${encodeURIComponent(
 			name,
 		)}/package.json`,
 	);
