@@ -1,6 +1,6 @@
 {
 	"name": "create-tsconfig-app",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "",
 	"bin": {
 		"create-ts-config": "./dist/index.js"
