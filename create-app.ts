@@ -214,7 +214,7 @@ export async function createApp({
 		/**
 		 * Default dependencies.
 		 */
-		const dependencies:string[] = [];
+		const dependencies: string[] = [];
 		/**
 		 * Default devDependencies.
 		 */
@@ -257,9 +257,13 @@ export async function createApp({
 		 * Copy the template files to the target directory.
 		 */
 		await cpy('**', root, {
-			cwd: path.join(__dirname, 'templates', 'default'),
+			cwd: path.join(__dirname, 'templates/default'),
 			rename: name => {
 				switch (name) {
+					case 'gitignore':
+					case 'eslintrc.json': {
+						return '.'.concat(name);
+					}
 					// README.md is ignored by webpack-asset-relocator-loader used by ncc:
 					// https://github.com/vercel/webpack-asset-relocator-loader/blob/e9308683d47ff507253e37c9bcbb99474603192b/src/asset-relocator.js#L227
 					case 'README-template.md': {
