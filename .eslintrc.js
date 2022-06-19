@@ -8,7 +8,7 @@ module.exports = {
 		es2021: true,
 		node: true,
 	},
-	extends: ['next', 'next/core-web-vitals', 'plugin:react/recommended', 'xo'],
+	extends: ['xo'],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaFeatures: { jsx: true },
