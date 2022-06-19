@@ -1,5 +1,5 @@
 {
-	"name": "create-ts-app",
+	"name": "create-tsconfig-app",
 	"version": "1.0.0",
 	"description": "",
 	"bin": {
@@ -17,14 +17,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Itsnotaka/create-ts-app.git"
+		"url": "git+https://github.com/Itsnotaka/create-tsconfig-app.git"
 	},
 	"author": "",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/Itsnotaka/create-ts-app/issues"
+		"url": "https://github.com/Itsnotaka/create-tsconfig-app/issues"
 	},
-	"homepage": "https://github.com/Itsnotaka/create-ts-app#readme",
+	"homepage": "https://github.com/Itsnotaka/create-tsconfig-app#readme",
 	"devDependencies": {
 		"@types/async-retry": "^1.4.4",
 		"@types/cross-spawn": "^6.0.2",
