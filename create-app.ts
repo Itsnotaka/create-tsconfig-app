@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import retry from 'async-retry';
 import chalk from 'chalk';
 import cpy from 'cpy';
@@ -23,6 +22,7 @@ import type { PackageManager } from './helpers/get-pkg-manager';
 
 export class DownloadError extends Error {}
 
+// eslint-disable-next-line complexity
 export async function createApp({
 	appPath,
 	packageManager,
@@ -92,7 +92,7 @@ export async function createApp({
 					`1. Your spelling of example ${chalk.red(
 						`"${example}"`,
 					)} might be incorrect.\n`,
-					`2. You might not be connected to the internet or you are behind a proxy.`,
+					'2. You might not be connected to the internet or you are behind a proxy.',
 				);
 				process.exit(1);
 			}
@@ -155,6 +155,7 @@ export async function createApp({
 				});
 			}
 		} catch (reason) {
+			// eslint-disable-next-line no-inner-declarations
 			function isErrorLike(err: unknown): err is { message: string } {
 				return (
 					typeof err === 'object' &&
@@ -162,10 +163,12 @@ export async function createApp({
 					typeof (err as { message?: unknown }).message === 'string'
 				);
 			}
+
 			throw new DownloadError(
-				isErrorLike(reason) ? reason.message : reason + '',
+				isErrorLike(reason) ? reason.message : String(reason),
 			);
 		}
+
 		// Copy our default `.gitignore` if the application did not provide one
 		const ignorePath = path.join(root, '.gitignore');
 		if (!fs.existsSync(ignorePath)) {
@@ -225,6 +228,7 @@ export async function createApp({
 		if (typescript) {
 			devDependencies.push('typescript', '@types/node');
 		}
+
 		/**
 		 * Install package.json dependencies if they exist.
 		 */
@@ -234,10 +238,12 @@ export async function createApp({
 			for (const dependency of dependencies) {
 				console.log(`- ${chalk.cyan(dependency)}`);
 			}
+
 			console.log();
 
 			await install(root, dependencies, installFlags);
 		}
+
 		/**
 		 * Install package.json devDependencies if they exist.
 		 */
@@ -247,28 +253,32 @@ export async function createApp({
 			for (const devDependency of devDependencies) {
 				console.log(`- ${chalk.cyan(devDependency)}`);
 			}
+
 			console.log();
 
 			const devInstallFlags = { devDependencies: true, ...installFlags };
 			await install(root, devDependencies, devInstallFlags);
 		}
+
 		console.log();
 		/**
 		 * Copy the template files to the target directory.
 		 */
 		await cpy('**', root, {
 			cwd: path.join(__dirname, 'templates/default'),
-			rename: name => {
+			rename(name) {
 				switch (name) {
 					case 'gitignore':
 					case 'eslintrc.json': {
 						return '.'.concat(name);
 					}
+
 					// README.md is ignored by webpack-asset-relocator-loader used by ncc:
 					// https://github.com/vercel/webpack-asset-relocator-loader/blob/e9308683d47ff507253e37c9bcbb99474603192b/src/asset-relocator.js#L227
 					case 'README-template.md': {
 						return 'README.md';
 					}
+
 					default: {
 						return name;
 					}

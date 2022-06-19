@@ -16,7 +16,7 @@ module.exports = {
 		sourceType: 'module',
 		project: './tsconfig.json',
 	},
-	plugins: ['react', '@typescript-eslint'],
+	plugins: ['@typescript-eslint'],
 	ignorePatterns: ['**/*.js'],
 	rules: {
 		// Next.js

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import got from 'got';
 import tar from 'tar';
 import { Stream } from 'stream';
@@ -36,8 +35,9 @@ export async function getRepoInfo(
 		if (infoResponse.statusCode !== 200) {
 			return;
 		}
+
 		const info = JSON.parse(infoResponse.body);
-		return { username, name, branch: info['default_branch'], filePath };
+		return { username, name, branch: info.default_branch, filePath };
 	}
 
 	// If examplePath is available, the branch name takes the entire path

@@ -61,11 +61,12 @@ async function run() {
 			name: 'path',
 			message: 'What is your project named?',
 			initial: 'my-app',
-			validate: name => {
+			validate(name) {
 				const validation = validateNpmName(path.basename(path.resolve(name)));
 				if (validation.valid) {
 					return true;
 				}
+
 				return 'Invalid project name: ' + validation.problems![0];
 			},
 		});
@@ -87,6 +88,7 @@ async function run() {
 		);
 		process.exit(1);
 	}
+
 	const resolvedProjectPath = path.resolve(projectPath);
 	const projectName = path.basename(resolvedProjectPath);
 
@@ -103,9 +105,9 @@ async function run() {
 		process.exit(1);
 	}
 
-	const packageManager = !!program.useNpm
+	const packageManager = program.useNpm
 		? 'npm'
-		: !!program.usePnpm
+		: program.usePnpm
 		? 'pnpm'
 		: getPkgManager();
 
@@ -128,7 +130,7 @@ async function run() {
 			name: 'builtin',
 			message:
 				`Could not download "${example}" because of a connectivity issue between your machine and GitHub.\n` +
-				`Do you want to use the default template instead?`,
+				'Do you want to use the default template instead?',
 			initial: true,
 		});
 		if (!res.builtin) {
@@ -162,6 +164,7 @@ async function notifyUpdate(): Promise<void> {
 					'\n',
 			);
 		}
+
 		process.exit();
 	} catch {
 		// ignore error
@@ -181,6 +184,7 @@ run()
 				reason,
 			);
 		}
+
 		console.log();
 
 		await notifyUpdate();

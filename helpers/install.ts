@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import chalk from 'chalk';
 import spawn from 'cross-spawn';
 import type { PackageManager } from './get-pkg-manager';
@@ -41,7 +40,7 @@ export function install(
 	 */
 	return new Promise((resolve, reject) => {
 		let args: string[];
-		let command = packageManager;
+		const command = packageManager;
 		const useYarn = packageManager === 'yarn';
 
 		if (dependencies && dependencies.length) {
@@ -82,6 +81,7 @@ export function install(
 				}
 			}
 		}
+
 		/**
 		 * Add any package manager-specific flags.
 		 */
@@ -90,6 +90,7 @@ export function install(
 		} else {
 			args.push(...npmFlags);
 		}
+
 		/**
 		 * Spawn the installation process.
 		 */
@@ -99,9 +100,11 @@ export function install(
 		});
 		child.on('close', (code: number) => {
 			if (code !== 0) {
+				// eslint-disable-next-line prefer-promise-reject-errors
 				reject({ command: `${command} ${args.join(' ')}` });
 				return;
 			}
+
 			resolve();
 		});
 	});
