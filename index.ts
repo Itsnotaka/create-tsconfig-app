@@ -20,14 +20,14 @@ const program = new Commander.Command(packageJson.name)
 	.option(
 		'--use-npm',
 		`
-  Explicitly tell the CLI to bootstrap the app using npm
-`,
+  	Explicitly tell the CLI to bootstrap the app using npm
+	`,
 	)
 	.option(
 		'--use-pnpm',
 		`
-  Explicitly tell the CLI to bootstrap the app using pnpm
-`,
+  	Explicitly tell the CLI to bootstrap the app using pnpm
+	`,
 	)
 	.option(
 		'-e, --example [name]|[github-url]',
@@ -151,13 +151,13 @@ async function notifyUpdate(): Promise<void> {
 		if (res?.latest) {
 			const pkgManager = getPkgManager();
 			console.log(
-				chalk.yellow.bold('A new version of `create-next-app` is available!') +
+				chalk.yellow.bold('A new version of `create-ts-app` is available!') +
 					'\n' +
 					'You can update by running: ' +
 					chalk.cyan(
 						pkgManager === 'yarn'
-							? 'yarn global add create-next-app'
-							: `${pkgManager} install --global create-next-app`,
+							? 'yarn global add create-ts-app'
+							: `${pkgManager} install --global create-ts-app`,
 					) +
 					'\n',
 			);
