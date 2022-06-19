@@ -37,7 +37,6 @@ export async function createApp({
 	typescript?: boolean;
 }): Promise<void> {
 	let repoInfo: RepoInfo | undefined;
-	const template = typescript ? 'typescript' : 'default';
 
 	if (example) {
 		let repoUrl: URL | undefined;
@@ -123,7 +122,7 @@ export async function createApp({
 	const isOnline = !useYarn || (await getOnline());
 	const originalDirectory = process.cwd();
 
-	console.log(`Creating a new Next.js app in ${chalk.green(root)}.`);
+	console.log(`Creating a new Typescript app in ${chalk.green(root)}.`);
 	console.log();
 
 	process.chdir(root);
@@ -171,7 +170,7 @@ export async function createApp({
 		const ignorePath = path.join(root, '.gitignore');
 		if (!fs.existsSync(ignorePath)) {
 			fs.copyFileSync(
-				path.join(__dirname, 'templates', template, 'gitignore'),
+				path.join(__dirname, 'templates', 'default', 'gitignore'),
 				ignorePath,
 			);
 		}
@@ -204,10 +203,10 @@ export async function createApp({
 			version: '0.1.0',
 			private: true,
 			scripts: {
-				dev: 'next dev',
-				build: 'next build',
-				start: 'next start',
-				lint: 'next lint',
+				dev: 'tsc -w',
+				start: 'node ./index.js',
+				format: 'prettier --write "src/**/*.{js,ts}"',
+				lint: 'eslint .',
 			},
 		};
 		/**
@@ -224,21 +223,16 @@ export async function createApp({
 		/**
 		 * Default dependencies.
 		 */
-		const dependencies = ['react', 'react-dom', 'next'];
+		const dependencies = [''];
 		/**
 		 * Default devDependencies.
 		 */
-		const devDependencies = ['eslint', 'eslint-config-next'];
+		const devDependencies = ['eslint', 'prettier'];
 		/**
 		 * TypeScript projects will have type definitions and other devDependencies.
 		 */
 		if (typescript) {
-			devDependencies.push(
-				'typescript',
-				'@types/react',
-				'@types/node',
-				'@types/react-dom',
-			);
+			devDependencies.push('typescript', '@types/node');
 		}
 		/**
 		 * Install package.json dependencies if they exist.
@@ -272,7 +266,7 @@ export async function createApp({
 		 * Copy the template files to the target directory.
 		 */
 		await cpy('**', root, {
-			cwd: path.join(__dirname, 'templates', template),
+			cwd: path.join(__dirname, 'templates', 'default'),
 			rename: name => {
 				switch (name) {
 					case 'gitignore':
