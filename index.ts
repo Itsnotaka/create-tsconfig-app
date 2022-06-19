@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import chalk from 'chalk';
 import Commander from 'commander';
 import packageJson from './package.json';
