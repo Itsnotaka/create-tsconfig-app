@@ -200,7 +200,7 @@ export async function createApp({
 				dev: 'tsc -w',
 				start: 'node ./index.js',
 				format: 'prettier --write "src/**/*.{js,ts}"',
-				lint: 'eslint .'
+				lint: 'eslint .',
 			},
 		};
 		/**
