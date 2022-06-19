@@ -26,6 +26,12 @@ const program = new Commander.Command(packageJson.name)
 	`,
 	)
 	.option(
+		'--use-yarn',
+		`
+  	Explicitly tell the CLI to bootstrap the app using yarn
+	`,
+	)
+	.option(
 		'--use-pnpm',
 		`
   	Explicitly tell the CLI to bootstrap the app using pnpm
