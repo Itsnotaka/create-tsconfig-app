@@ -125,7 +125,11 @@ export async function createApp({
 	const isOnline = !useYarn || (await getOnline());
 	const originalDirectory = process.cwd();
 
-	console.log(`Creating a new Typescript app in ${chalk.green(root)}.`);
+	console.log(
+		`Creating a new Typescript app${
+			swc ? ' using swc ' : ncc ? ' using ncc ' : ' '
+		}in ${chalk.green(root)}.`,
+	);
 	console.log();
 
 	process.chdir(root);

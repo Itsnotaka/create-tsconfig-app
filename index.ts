@@ -138,6 +138,8 @@ async function run() {
 			packageManager,
 			example: example && example !== 'default' ? example : undefined,
 			examplePath: program.examplePath,
+			swc: program.swc,
+			ncc: program.ncc,
 		});
 	} catch (reason) {
 		if (!(reason instanceof DownloadError)) {
