@@ -1,6 +1,11 @@
 {
 	"name": "create-tsconfig-app",
 	"version": "1.2.1",
+	"keywords": [
+		"typescript",
+		"swc",
+		"ncc"
+	  ],
 	"description": "Create Typescript apps with one command",
 	"bin": {
 		"create-tsconfig-app": "./dist/index.js"
