@@ -24,15 +24,11 @@ const program = new Commander.Command(packageJson.name)
 		`
 	  Initialize the project with SWC for compiler.
 	`,
-	).option(
+	)
+	.option(
 		'--ncc',
 		`
 	  Initialize the project with @vercel/ncc for compiler.
-	`,
-	).option(
-		'--tw, --tailwindcss',
-		`
-	  Initialize the project with tailwind for styling.
 	`,
 	)
 	.option(
@@ -163,6 +159,8 @@ async function run() {
 		await createApp({
 			appPath: resolvedProjectPath,
 			packageManager,
+			swc: program.swc,
+			ncc: program.ncc,
 		});
 	}
 }

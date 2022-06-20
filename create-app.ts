@@ -28,13 +28,18 @@ export async function createApp({
 	packageManager,
 	example,
 	examplePath,
+	swc,
+	ncc,
 }: {
 	appPath: string;
 	packageManager: PackageManager;
 	example?: string;
 	examplePath?: string;
+	swc?: boolean;
+	ncc?: boolean;
 }): Promise<void> {
 	let repoInfo: RepoInfo | undefined;
+	const template = swc ? 'swc' : ncc ? 'ncc' : 'default';
 
 	if (example) {
 		let repoUrl: URL | undefined;
@@ -190,16 +195,37 @@ export async function createApp({
 		/**
 		 * Create a package.json for the new project.
 		 */
+
 		const packageJson = {
 			name: appName,
 			version: '0.1.0',
 			private: true,
-			scripts: {
-				dev: 'tsc -w',
-				start: 'node ./index.js',
-				format: 'prettier --write "src/**/*.{js,ts}"',
-				lint: 'eslint .',
-			},
+			...(swc && {
+				scripts: {
+					dev: 'swc index.ts -w',
+					build: 'npx swc ./index.ts -d dist',
+					format: "prettier --write '**/*.{js,ts}'",
+					lint: 'eslint --ext .ts',
+				},
+			}),
+			...(ncc && {
+				scripts: {
+					dev: 'ncc build ./index.ts -w -o dist/',
+					build:
+						'ncc build ./index.ts -o ./dist/ --minify --no-cache --no-source-map-register',
+					format: "prettier --write '**/*.{js,ts}'",
+					lint: 'eslint --ext .ts',
+				},
+			}),
+			...(!swc &&
+				!ncc && {
+					scripts: {
+						dev: 'tsc -w',
+						build: 'tsc',
+						format: "prettier --write '**/*.{js,ts}'",
+						lint: 'eslint --ext .ts',
+					},
+				}),
 		};
 		/**
 		 * Write it to disk.
@@ -223,10 +249,13 @@ export async function createApp({
 		/**
 		 * TypeScript projects will have type definitions and other devDependencies.
 		 */
-		// if (typescript) {
-		// 	devDependencies.push();
-		// }
 
+		/* add scripts depending on the compiler for the project */
+		if (swc) {
+			devDependencies.push('@swc/cli', '@swc/core', 'chokidar');
+		} else if (ncc) {
+			devDependencies.push('@vercel/ncc');
+		}
 		/**
 		 * Install package.json dependencies if they exist.
 		 */
@@ -264,7 +293,7 @@ export async function createApp({
 		 */
 		await cpy('**', root, {
 			parents: true,
-			cwd: path.join(__dirname, 'templates/default'),
+			cwd: path.join(__dirname, 'templates', template),
 			rename(name) {
 				switch (name) {
 					case 'gitignore':
