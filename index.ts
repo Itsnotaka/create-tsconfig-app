@@ -20,6 +20,22 @@ const program = new Commander.Command(packageJson.name)
 		projectPath = name;
 	})
 	.option(
+		'--swc',
+		`
+	  Initialize the project with SWC for compiler.
+	`,
+	).option(
+		'--ncc',
+		`
+	  Initialize the project with @vercel/ncc for compiler.
+	`,
+	).option(
+		'--tw, --tailwindcss',
+		`
+	  Initialize the project with tailwind for styling.
+	`,
+	)
+	.option(
 		'--use-npm',
 		`
   	Explicitly tell the CLI to bootstrap the app using npm
@@ -41,7 +57,7 @@ const program = new Commander.Command(packageJson.name)
 		'-e, --example [name]|[github-url]',
 		`
 	  An example to bootstrap the app with. You can use an example name
-	  from the official Next.js repo or a GitHub URL. The URL can use
+	  from the official create-tsconfig-app repo or a GitHub URL. The URL can use
 	  any branch and/or subdirectory
 	`,
 	)
